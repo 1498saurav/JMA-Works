@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for,render_template
 from werkzeug.utils import secure_filename
 import os
 
-from processCSV import removeAllFiles
+from processCSV import removeAllFiles,processData
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
 ALLOWED_EXTENSIONS = {'csv'}
@@ -37,15 +37,15 @@ def test():
 
 			f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 			print("Uploaded Files!")
-			return redirect(url_for('processData'))
+			return redirect(url_for('process'))
 		else:
 			print("Invalid File Type")
 			return redirect(url_for('index'))
 
-@app.route('/processData')
-def processData():
-
+@app.route('/process')
+def process():
+	data=processData()
 	removeAllFiles()
-	return("Hello There")		
+	return(data.to_html())		
 
 app.run(host='0.0.0.0', port=8080)
