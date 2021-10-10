@@ -16,7 +16,8 @@ def processData():
 		data_pivot.loc["Grand Total"] = data_pivot.select_dtypes(np.number).sum()
 		data_store.append(data_pivot)
 		test=data_pivot
-		for i in ["JioPages Mobility","Jio Saavn"]:
+		filedAgainst = ["JioPages Mobility","Jio Saavn"]
+		for i in filedAgainst:
 			test=data[data['Filed Against'] == i]
 			print(test)
 		#	test=pd.pivot_table(test,index="State",columns="Severity",values="Due Date",aggfunc=len,fill_value=0)

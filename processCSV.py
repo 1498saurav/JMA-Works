@@ -2,7 +2,7 @@
 import os
 import pandas as pd
 import numpy as np
-filedAgainst=""
+
 ##filename=""
 #for file in os.scandir("/home/runner/JMA-Works/CSV"):
 #	filename=file.path
@@ -10,7 +10,9 @@ filedAgainst=""
 
 def processData():
 	try:
+		filedAgainst=""
 		filename=""
+		final_data=[]
 		data_store = []
 		for file in os.scandir("/home/runner/JMA-Works/CSV"):
 		 filename=file.path
@@ -43,13 +45,15 @@ def processData():
 			test.loc["Grand Total"] = test.select_dtypes(np.number).sum()
 			#print(test)
 			data_store.append(test)
-
+		
+		final_data.append(data_store)
+		final_data.append(filedAgainst)
 		#data_pivot=data_pivot.crosstab(Sever, rownames=['a'], colnames=['b', 'c'])
 		#pd.crosstab(a, [b, c], rownames=['a'], colnames=['b', 'c'])
 		print("Processing data_pivot!")
 		#print(data_pivot)
 		#print(data_store)
-		return data_store
+		return final_data
 		
 	except:
 		print("Processing Failed!")

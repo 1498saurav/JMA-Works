@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for,render_template
 from werkzeug.utils import secure_filename
 import os
 
-from processCSV import removeAllFiles,processData,filedAgainst
+from processCSV import removeAllFiles,processData
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
 ALLOWED_EXTENSIONS = {'csv'}
@@ -45,8 +45,9 @@ def test():
 @app.route('/process')
 def process():
 	data=processData()
+	
 	removeAllFiles()
-	print(filedAgainst)
-	return render_template("data.html",tables=[i.to_html() for i in data])
+	print(data[0])
+	return render_template("data.html",tables=[i.to_html() for i in data[0]], titles=[i for i in data[1]])
 
 app.run(host='0.0.0.0', port=8080) 

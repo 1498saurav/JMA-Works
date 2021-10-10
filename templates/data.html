@@ -1,4 +1,6 @@
-{% for table in tables %}
-{{ table|safe }}
+All
+{% for i in range(tables|length): %}
+{{ tables[i]|safe }}
 <br>
+{{ titles[i] }}
 {% endfor %}

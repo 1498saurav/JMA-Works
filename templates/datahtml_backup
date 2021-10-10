@@ -1,0 +1,5 @@
+{% for table in tables %}
+{{ table|safe }}
+{{ titles }}
+<br>
+{% endfor %}
