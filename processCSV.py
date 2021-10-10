@@ -23,9 +23,9 @@ def processData():
 		#df[0].to_string(index=False)
 		filedAgainst=(df[0].to_list())
 		print(filedAgainst)
-		
+
 		test=data_pivot
-		for i in ["JioPages Mobility","Jio Saavn"]:
+		for i in filedAgainst:
 			test=data[data['Filed Against'] == i]
 			test=pd.pivot_table(test,index="State",columns="Severity",values="Due Date",aggfunc=len,fill_value=0)
 			test["Grand Total"] = test.sum(axis=1)
