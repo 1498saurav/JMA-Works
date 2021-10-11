@@ -4,6 +4,7 @@ import os
 
 from processCSV import removeAllFiles,processData
 from toExcel import printExcel
+from filedAgainst import products
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
 DOWNLOAD_FOLDER = '/home/runner/JMA-Works/Downloads/'
@@ -39,9 +40,9 @@ def test():
 #f.save(secure_filename(f.filename))
 		if f and allowed_file(f.filename):	
 
-			f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+			f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename("Main.csv")))
 			print("Uploaded Files!")
-			return redirect(url_for('process'))
+			return redirect(url_for('fileUpload'))
 		else:
 			print("Invalid File Type")
 			return redirect(url_for('index'))
@@ -52,7 +53,7 @@ def process():
 	data[1].insert(0, "All")
 	#printExcel(data,app.config['DOWNLOAD_FOLDER'])
 	#send_from_directory(app.config['DOWNLOAD_FOLDER'],"Dashboard.xlsx", as_attachment=True)
-	removeAllFiles()
+	#removeAllFiles()
 
 	#print(data[0])
 	return render_template("data.html",tables=[i.to_html() for i in data[0]], titles=[i for i in data[1]])
@@ -63,8 +64,14 @@ def downloadFile():
 	printExcel(data,app.config['DOWNLOAD_FOLDER'])
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],"Dashboard.xlsx", as_attachment=True)
 
+@app.route('/fileUpload')
+def fileUpload():
+	return render_template("home.html")
+
 @app.route('/retestCategory')
 def retestCategoryDisplay():
-	return "Working Display!"
+	filedAgainstList = products()
+	#print(filedAgainstList)
+	return render_template("retestCategory.html",filedAgainstList=filedAgainstList)
 
 app.run(host='0.0.0.0', port=8080) 
