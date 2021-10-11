@@ -63,4 +63,8 @@ def downloadFile():
 	printExcel(data,app.config['DOWNLOAD_FOLDER'])
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],"Dashboard.xlsx", as_attachment=True)
 
+@app.route('/retestCategory')
+def retestCategoryDisplay():
+	return "Working Display!"
+
 app.run(host='0.0.0.0', port=8080) 
