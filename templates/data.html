@@ -1,6 +1,7 @@
-All
+<a href="/download/Dashboard.xlsx">Download All!</a><br>
+
 {% for i in range(tables|length): %}
+{{ titles[i] }}
 {{ tables[i]|safe }}
 <br>
-{{ titles[i] }}
 {% endfor %}

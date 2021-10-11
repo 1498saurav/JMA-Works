@@ -55,9 +55,9 @@ def processData():
 		#print(data_store)
 		return final_data
 		
-	except:
+	except Exception as ex:
 		print("Processing Failed!")
-
+		print(ex)
 def removeAllFiles():
 	#shutil.rmtree("/home/runner/JMA-Works/CSV")
 	print("Removing Files!")
