@@ -4,7 +4,8 @@ import os
 
 from processCSV import removeAllFiles,processData
 from toExcel import printExcel
-from filedAgainst import products
+from filedAgainst import products,member
+from retest import retestCreator
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
 DOWNLOAD_FOLDER = '/home/runner/JMA-Works/Downloads/'
@@ -72,6 +73,15 @@ def fileUpload():
 def retestCategoryDisplay():
 	filedAgainstList = products()
 	#print(filedAgainstList)
-	return render_template("retestCategory.html",filedAgainstList=filedAgainstList)
+	return render_template("retestCategory.html",filedAgainstList=filedAgainstList,member=member)
+
+@app.route('/rdownload', methods = ['GET', 'POST'])
+def downloadRetest():
+	productName= request.form['productType']
+	#print(productName)
+	retestCreator(productName)
+	productName=productName+".xlsx"
+	#productName=os.path.join("",".csv")
+	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
 
 app.run(host='0.0.0.0', port=8080) 
