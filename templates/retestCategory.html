@@ -46,10 +46,15 @@
     <div class="flex items-center lg:w-3/5 mx-auto border-b pb-5 mb-5 border-gray-200 sm:flex-row flex-col">
       <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
         <h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select Absentees</h2>
-
+								
         {% for i in member %}
         <input id="{{i}}" type="checkbox" name="membersList" value="{{i}}" class="leading-relaxed text-base">
 				<label for="{{i}}">{{i}}</label>
+				&emsp;&ensp;
+
+					{% if(loop.index % 5 == 0)%}
+					<br>
+					{% endif %}
 				{% endfor %}
 
       </div>
