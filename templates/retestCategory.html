@@ -7,9 +7,25 @@
   <!-- ... -->
 </head>
 <body>
+
+  <header class="text-gray-600 body-font">
+  	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    	<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-green-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <span class="ml-3 text-xl">Media Apps</span>
+    	</a>
+    	<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:text-gray-900" href="#">Dashboard</a>
+      <a class="mr-5 hover:text-gray-900" href="/retestCategory">Retest Sheet</a>
+    	</nav>
+  	</div>
+	</header>
+
 <form action = "/rdownload" method = "POST" >
 <section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="container px-5 py-0 mx-auto">
 		<h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-green-200 mb-4">Retest Sheet Creator!</h1>
     <div class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
       <div class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0">
@@ -61,7 +77,8 @@
       </div>
     </div>
 
-    <button type="Submit" class="flex mx-auto mt-20 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Create</button>
+    <button type="Submit" class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Create</button>
+		<br>
   </div>
 
 </section>

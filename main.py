@@ -78,8 +78,13 @@ def retestCategoryDisplay():
 @app.route('/rdownload', methods = ['GET', 'POST'])
 def downloadRetest():
 	productName= request.form['productType']
+	ngrp = request.form['grpNum']
+	absentMembers=request.form.getlist('membersList')
+	members=member.copy()
+	for i in absentMembers:
+		members.remove(i)
 	#print(productName)
-	retestCreator(productName)
+	retestCreator(productName,ngrp,members)
 	productName=productName+".xlsx"
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
