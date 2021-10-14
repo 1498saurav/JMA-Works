@@ -3,7 +3,7 @@ import os
 import math
 import random
 
-def retestCreator(productName,ngrp,members):
+def retestCreator(productName,ngrp,oser,members):
 
 	path="/home/runner/JMA-Works/Downloads/"
 	path=os.path.join(path,productName+'.xlsx')
@@ -11,6 +11,7 @@ def retestCreator(productName,ngrp,members):
 	filename="/home/runner/JMA-Works/CSV/Main.csv"
 	data=pd.read_csv(filename)
 	data=data[data['Filed Against'] == productName]
+	data=data[data['OS'] == oser]
 	for i in ["Resolved","Retired","Rejected"]: 
 		data=data[data['State'] != i]
 	data = data[['ID', 'State', 'Severity','Title']].copy()

@@ -23,7 +23,7 @@
   	</div>
 	</header>
 
-<form action = "/rdownload" method = "POST" >
+<form action = "/analysis" method = "POST" >
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-0 mx-auto">
 		<h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-green-200 mb-4">Retest Sheet Creator!</h1>
@@ -45,16 +45,20 @@
     </div>
     <div class="flex items-center lg:w-3/5 mx-auto border-b pb-5 mb-5 border-gray-200 sm:flex-row flex-col">
       <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-        <h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select Absentees</h2>
-								
-        {% for i in member %}
-        <input id="{{i}}" type="checkbox" name="membersList" value="{{i}}" class="leading-relaxed text-base">
-				<label for="{{i}}">{{i}}</label>
-				&emsp;&ensp;
-					{% if(loop.index % 5 == 0) %}
+        <h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select Sheet Type</h2>
+					{% for i in sheetType %}
+        		<input id="{{i}}" type="checkbox" name="sheetList" value="{{i}}" class="leading-relaxed text-base" checked>
+						<label for="{{i}}">{{i}}</label>
+						&emsp;&ensp;
+					{% endfor %}
+
 					<br>
-					{% endif %}
-				{% endfor %}
+				<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select Severity</h2>
+					{% for i in severityType %}
+        		<input id="{{i}}" type="checkbox" name="severityList" value="{{i}}" class="leading-relaxed text-base" checked>
+						<label for="{{i}}">{{i}}</label>
+						&emsp;&ensp;
+					{% endfor %}
 
       </div>
       <div class="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0">
@@ -73,17 +77,18 @@
         </svg>
       </div>
       <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-        <h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select Number Of Groups</h2>
-        <input id="two" type="radio" name="grpNum" value="two" class="leading-relaxed text-base">
-				<label for="two">two</label>
-				<input id="three" type="radio" name="grpNum" value="three" class="leading-relaxed text-base" checked>
-				<label for="three">three</label>
-
 				<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Select OS</h2>
         <input id="iOS" type="radio" name="os" value="iOS" class="leading-relaxed text-base">
 				<label for="iOS">iOS</label>
 				<input id="android" type="radio" name="os" value="Android" class="leading-relaxed text-base" checked>
 				<label for="android">Android</label>
+
+				<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Quarter Wise Sheet?</h2>
+        <input id="Yes" type="radio" name="quarter" value="Yes" class="leading-relaxed text-base">
+				<label for="Yes">Yes</label>
+				<input id="No" type="radio" name="quarter" value="No" class="leading-relaxed text-base" checked>
+				<label for="No">No</label>
+
       </div>
     </div>
 
