@@ -26,7 +26,6 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 	data = data.where(pd.notnull(data), None)
 
 	sheet_name = 'Retest Sheet'
-	sheet_name2 = 'Pivot Sheet'
 
 	writer= pd.ExcelWriter(path,engine='xlsxwriter')
 	#data.to_excel(writer, sheet_name="Retest Sheet",index=False)

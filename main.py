@@ -92,7 +92,7 @@ def downloadRetest():
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
 
-@app.route('/dashboard',)
+@app.route('/dashboard')
 def dashboard():
 	filedAgainstList = products()
 	return render_template("dashboard.html",filedAgainstList=filedAgainstList,sheetType=["Production","PreProd"],severityType=["Blocker","Critical","Major","Normal","Minor"])
@@ -109,6 +109,8 @@ def downloadDashboard():
 	sheetLists=sheetList.copy()
 	severityLists=severityList.copy()
 	slist=["Blocker","Critical","Major","Normal","Minor"]
+	if len(severityLists) == 0 or len(sheetLists) == 0:
+		return redirect(url_for('dashboard'))
 	severityLists = [i for i in severityLists + slist if i not in severityLists or i not in slist]
 
 	#print(productName)
