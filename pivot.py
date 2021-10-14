@@ -15,9 +15,9 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 		
 	if len(sheetLists)!= 2:
 		if sheetLists[0]=="Production":
-			data=data[data['Enviroment'] == "Production"]
+			data=data[data['Environment'] == "Production"]
 		else:
-			data=data[data['Enviroment'] != "Production"]
+			data=data[data['Environment'] != "Production"]
 
 	for i in severityLists: 
 		data=data[data['Severity'] != i]		
