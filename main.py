@@ -119,6 +119,4 @@ def downloadDashboard():
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
 
-
-
 app.run(host='0.0.0.0', port=8080)
