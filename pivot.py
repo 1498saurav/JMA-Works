@@ -1,13 +1,22 @@
 import pandas as pd
 import os
+from dateutil.parser import parse
+
+def convert(x):
+	dt=parse(x, fuzzy_with_tokens=True)
+	return(dt[0].strftime('%m/%d/%Y'))
 
 def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 
 	path="/home/runner/JMA-Works/Downloads/"
-	path=os.path.join(path,productName+'pivot.xlsx')
+	path=os.path.join(path,productName+' pivot.xlsx')
 
 	filename="/home/runner/JMA-Works/CSV/Main.csv"
 	data=pd.read_csv(filename)
+
+	data['Created Date']=data['Created Date'].apply(convert)
+	data['RTC Creation Date']=data['RTC Creation Date'].apply(convert)
+
 	data=data[data['Filed Against'] == productName]
 	data=data[data['OS'] == oser]
 	for i in ["Resolved","Retired","Rejected"]: 
@@ -21,6 +30,10 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 
 	for i in severityLists: 
 		data=data[data['Severity'] != i]		
+
+	if(quarterwise==1):
+		data=data[data['Created Date'] >= "Production"]
+
 
 	data = data[['ID', 'State', 'Severity','Title']].copy()
 	data = data.where(pd.notnull(data), None)
@@ -77,3 +90,4 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 		worksheet.write(r, c + 3,row['Title'],summary_format)
 		r += 1
 	writer.save()
+

@@ -115,7 +115,7 @@ def downloadDashboard():
 
 	#print(productName)
 	pivotCreator(productName,sheetLists,severityLists,oser,quarterwise)
-	productName=productName+"pivot.xlsx"
+	productName=productName+" pivot.xlsx"
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
 
