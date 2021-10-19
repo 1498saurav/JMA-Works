@@ -3,8 +3,11 @@ import os
 from dateutil.parser import parse
 
 def convert(x):
-	dt=parse(x, fuzzy_with_tokens=True)
-	return(dt[0].strftime('%m/%d/%Y'))
+	try:
+		dt=parse(x, fuzzy_with_tokens=True)
+		return(dt[0].strftime('%d/%m/%Y'))
+	except:
+		return("")
 
 def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 
@@ -13,9 +16,13 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 
 	filename="/home/runner/JMA-Works/CSV/Main.csv"
 	data=pd.read_csv(filename)
-
+	#print(data)
 	data['Created Date']=data['Created Date'].apply(convert)
 	data['RTC Creation Date']=data['RTC Creation Date'].apply(convert)
+	#data['RTC Creation Date']=data['RTC Creation Date'].apply(convert)
+
+	data['Created Date'] = pd.to_datetime(data['Created Date'])
+	data['RTC Creation Date'] = pd.to_datetime(data['RTC Creation Date'])
 
 	data=data[data['Filed Against'] == productName]
 	data=data[data['OS'] == oser]
@@ -31,10 +38,14 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 	for i in severityLists: 
 		data=data[data['Severity'] != i]		
 
+	print(data)
 	if(quarterwise==1):
-		data=data[data['Created Date'] >= "Production"]
+		start_date="2021-10-1"
+		end_date="2021-10-14"
+		mask = (data['Created Date'] >= start_date) & (data['Created Date'] <= end_date)
+		data = data.loc[mask]
 
-
+	print(data['Created Date'])
 	data = data[['ID', 'State', 'Severity','Title']].copy()
 	data = data.where(pd.notnull(data), None)
 
