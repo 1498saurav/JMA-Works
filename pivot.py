@@ -3,8 +3,9 @@ import numpy as np
 import os
 from dateutil.parser import parse
 
-filename="/home/runner/JMA-Works/CSV/Main.csv"
-data=pd.read_csv(filename)
+#data=""
+#filename="/home/runner/JMA-Works/CSV/Main.csv"
+#data=pd.read_csv(filename)
 
 def convert(x):
 	try:
@@ -13,7 +14,7 @@ def convert(x):
 	except:
 		return("")
 
-def test():
+def test(data):
 	data["Created Date"]=data["Created Date"].apply(convert)
 	data['Created Date'] = pd.to_datetime(data['Created Date'])
 	return data
@@ -23,14 +24,14 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 	path="/home/runner/JMA-Works/Downloads/"
 	path=os.path.join(path,productName+' pivot.xlsx')
 
-	#filename="/home/runner/JMA-Works/CSV/Main.csv"
-	#data=pd.read_csv(filename)
+	filename="/home/runner/JMA-Works/CSV/Main.csv"
+	data=pd.read_csv(filename)
 	#print(data)
 	#data['Created Date']=data['Created Date'].apply(convert)
 	#data['RTC Creation Date']=data['RTC Creation Date'].apply(convert)
 	#data['RTC Creation Date']=data['RTC Creation Date'].apply(convert)
 
-	data=test()
+	#data=test(data)
 
 	#data['Created Date'] = pd.to_datetime(data['Created Date'])
 	#data['RTC Creation Date'] = pd.to_datetime(data['RTC Creation Date'])
@@ -49,14 +50,18 @@ def pivotCreator(productName,sheetLists,severityLists,oser,quarterwise):
 	for i in severityLists: 
 		data=data[data['Severity'] != i]		
 
-	#print(quarterwise)
+	print(quarterwise)
+	#print(data)
 	if(int(quarterwise)==1):
-		#print("Checking")
+		data=test(data)
+		print("Checking")
+		print(data)
 		start_date= '2021-10-01'
 		end_date= '2021-10-19'
 		mask = (data['Created Date'] >= start_date) & (data['Created Date'] <= end_date)
 		#print(mask)
 		data = data.loc[mask]
+		print(data['Created Date'])
 
 	#print(data['Created Date'])
 	data = data[['ID', 'State', 'Severity','Title']].copy()
