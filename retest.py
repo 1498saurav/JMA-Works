@@ -65,9 +65,9 @@ def retestCreator(productName,ngrp,oser,members):
 			count+=1
 		memberTable[header[i]]=rowData
 
-	print(memberTable)
+	#print(memberTable)
 	df_member=pd.DataFrame(memberTable)
-	print(df_member)
+	#print(df_member)
 
 	sheet_name = 'Retest Sheet'
 	sheet_name2 = 'Assign Issue'
