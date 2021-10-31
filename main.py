@@ -2,10 +2,9 @@ from flask import Flask, request, redirect, url_for,render_template,send_from_di
 from werkzeug.utils import secure_filename
 import os
 
-from processCSV import removeAllFiles,processData
-from toExcel import printExcel
 from filedAgainst import products,member
 from retest import retestCreator
+from newIssues import newIssueSheetCreator
 from pivot import pivotCreator
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
@@ -49,23 +48,6 @@ def test():
 			print("Invalid File Type")
 			return redirect(url_for('index'))
 
-@app.route('/process')
-def process():
-	data=processData()
-	data[1].insert(0, "All")
-	#printExcel(data,app.config['DOWNLOAD_FOLDER'])
-	#send_from_directory(app.config['DOWNLOAD_FOLDER'],"Dashboard.xlsx", as_attachment=True)
-	#removeAllFiles()
-
-	#print(data[0])
-	return render_template("data.html",tables=[i.to_html() for i in data[0]], titles=[i for i in data[1]])
-
-@app.route('/download/Dashboard.xlsx')
-def downloadFile():
-	print(app.config['DOWNLOAD_FOLDER'])
-	printExcel(data,app.config['DOWNLOAD_FOLDER'])
-	return send_from_directory(app.config['DOWNLOAD_FOLDER'],"Dashboard.xlsx", as_attachment=True)
-
 @app.route('/fileUpload')
 def fileUpload():
 	return render_template("home.html")
@@ -88,6 +70,7 @@ def downloadRetest():
 		members.remove(i)
 	#print(productName)
 	retestCreator(productName,ngrp,oser,members)
+	newIssueSheetCreator(productName)
 	productName=productName+".xlsx"
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
@@ -96,7 +79,6 @@ def downloadRetest():
 def dashboard():
 	filedAgainstList = products()
 	return render_template("dashboard.html",filedAgainstList=filedAgainstList,sheetType=["Production","PreProd"],severityType=["Blocker","Critical","Major","Normal","Minor"])
-
 
 @app.route('/analysis', methods = ['GET', 'POST'])
 def downloadDashboard():
