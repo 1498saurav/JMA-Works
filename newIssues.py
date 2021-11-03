@@ -90,6 +90,14 @@ def newIssueSheetCreator(productName):
 	sheet.column_dimensions['H'].width = 20
 	sheet.column_dimensions['I'].width = 8
 	sheet.row_dimensions[1].height = 30
+
+	c = sheet['J2']
+	sheet.freeze_panes = c
+
+	sheet = wb2['Retest Sheet']
+	c = sheet['H2']
+	sheet.freeze_panes = c
+
 	wb2.save(path)
 
 	
