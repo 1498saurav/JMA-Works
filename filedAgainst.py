@@ -1,28 +1,25 @@
 import pandas as pd
 
 member=[
-'Aparna',
-'Vedant',
+'Atharv',
+'Swarnima',
+'Piyush22',
+'Deepak201',
+'Ankita.Shinde',
+'Snehal1',
+'Namrata',
+'Komal',
+'Chandan',
+'Premkumar',
+'Nikhil',
+'Ashish20',
+'Khushboo1',
+'Roopesh',
 'Somesh',
 'Tanmay',
-'Gaurav1',
-'Khushboo',
-'Ankita',
-'Roopesh',
-'Gaurav1.D',
-'Sakshi',
-'Mitali',
-'Geeta',
-'Atharv',
-'Vijaya',
-'Sudip',
-'Swati',
-'Amol',
-'Anushree',
-'Kalpesh',
-'Abhisek',
-'Anurag',
-'Pooja'
+'Vedant',
+'Aparna',
+'Ankita3'
 ]
 
 def products():

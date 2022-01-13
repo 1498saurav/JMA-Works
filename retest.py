@@ -12,7 +12,7 @@ def retestCreator(productName,ngrp,oser,members):
 	data=pd.read_csv(filename)
 	data=data[data['Filed Against'] == productName]
 	data=data[data['OS'] == oser]
-	for i in ["Resolved","Retired","Rejected"]: 
+	for i in ["Resolved","Retired","Rejected","Defer"]: 
 		data=data[data['State'] != i]
 	data = data[['ID', 'State', 'Severity','Title']].copy()
 	data = data.where(pd.notnull(data), None)

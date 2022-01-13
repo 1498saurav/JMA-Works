@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
 import os
 
-def newIssueSheetCreator(productName):
+def formatter(productName):
 	path="/home/runner/JMA-Works/Downloads/"
 	path=os.path.join(path,productName+'.xlsx')
 

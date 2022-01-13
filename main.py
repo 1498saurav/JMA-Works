@@ -4,7 +4,9 @@ import os
 
 from filedAgainst import products,member
 from retest import retestCreator
+from retestUpdate import rtestCreator
 from newIssues import newIssueSheetCreator
+from excelFormatter import formatter
 from pivot import pivotCreator
 
 UPLOAD_FOLDER = '/home/runner/JMA-Works/CSV/'
@@ -98,6 +100,23 @@ def downloadDashboard():
 	#print(productName)
 	pivotCreator(productName,sheetLists,severityLists,oser,quarterwise)
 	productName=productName+" pivot.xlsx"
+	#productName=os.path.join("",".csv")
+	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
+
+@app.route('/rtest', methods = ['GET', 'POST'])
+def rtest():
+	productName= "Jio Saavn"
+	ngrp = 3
+	oser="Android"
+	#absentMembers=request.form.getlist('membersList')
+	
+	members=member.copy()
+	#for i in absentMembers:
+	#	members.remove(i)
+	#print(productName)
+	rtestCreator(productName,ngrp,oser,members)
+	#formatter(productName)
+	productName=productName+".xlsx"
 	#productName=os.path.join("",".csv")
 	return send_from_directory(app.config['DOWNLOAD_FOLDER'],productName,as_attachment=True)
 
